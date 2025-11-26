@@ -15,9 +15,9 @@ export const config = {
     uri: env.MONGODB_URI,
   },
   jwt: {
-    secret: env.JWT_SECRET,
-    accessExpiry: env.JWT_ACCESS_EXPIRY,
-    refreshExpiry: env.JWT_REFRESH_EXPIRY,
+    secret: env.JWT_SECRET!,
+    accessExpiry: env.JWT_ACCESS_EXPIRY!,
+    refreshExpiry: env.JWT_REFRESH_EXPIRY!,
   },
   cors: {
     origin: env.FRONTEND_URL,

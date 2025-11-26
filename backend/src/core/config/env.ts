@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { envsafe, str, port, url, makeValidator } from "envsafe";
 
 const jwtParser = makeValidator<string>((input) => {
