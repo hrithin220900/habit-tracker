@@ -10,6 +10,8 @@ import {
 } from "./core/middlewares/error.middleware.js";
 import { apiLimiter } from "./core/middlewares/rateLimit.middleware.js";
 
+import authRoutes from "./modules/auth/auth.routes.js";
+
 const app = express();
 
 app.use(helmet());
@@ -33,6 +35,9 @@ app.get("/health", (req, res) => {
 app.use(config.server.apiPrefix, (req, res) => {
   res.json({ message: "API is running" });
 });
+
+// Auth routes
+app.use(`${config.server.apiPrefix}/auth`, authRoutes);
 
 app.use(notFoundHandler);
 

@@ -20,7 +20,7 @@ export const generateRefreshToken = (payload: JWTPayload): string => {
   const secret = config.jwt.secret as Secret;
 
   const options: SignOptions = {
-    expiresIn: config.jwt.accessExpiry as NonNullable<SignOptions["expiresIn"]>,
+    expiresIn: config.jwt.refreshExpiry as NonNullable<SignOptions["expiresIn"]>,
   };
   return jwt.sign(payload, secret, options);
 };

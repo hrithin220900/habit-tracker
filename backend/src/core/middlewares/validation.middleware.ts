@@ -3,14 +3,17 @@ import { ZodType, ZodError } from "zod";
 import { ValidationError } from "../utils/errors.js";
 import { logger } from "../utils/logger.js";
 
-export const validate = (
-  schema: ZodType,
-  source: "body" | "query" | "params" = "body"
-) => {
+export const validate =
+  (schema: ZodType, source: "body" | "query" | "params" = "body") =>
   async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const data = req[source];
-      const validated = await schema.parseAsync(data);
+
+      let validationSchema = schema;
+      if ("shape" in schema && "body" in (schema as any).shape) {
+        validationSchema = (schema as any).shape[source];
+      }
+      const validated = await validationSchema.parseAsync(data);
 
       req[source] = validated as (typeof req)[typeof source];
       next();
@@ -28,4 +31,3 @@ export const validate = (
       next(error);
     }
   };
-};
