@@ -12,6 +12,11 @@ import { apiLimiter } from "./core/middlewares/rateLimit.middleware.js";
 
 import authRoutes from "./modules/auth/auth.routes.js";
 import habitsRoutes from "./modules/habits/habits.routes.js";
+import analyticsRoutes from "./modules/analytics/analytics.routes.js";
+import {
+  createApolloServer,
+  startApolloServer,
+} from "./core/graphql/server.js";
 
 const app = express();
 
@@ -33,7 +38,14 @@ app.get("/health", (req, res) => {
   });
 });
 
-app.use(config.server.apiPrefix, (req, res) => {
+app.use(config.server.apiPrefix, (req, res, next) => {
+  if (
+    req.path.startsWith("/auth") ||
+    req.path.startsWith("/habits") ||
+    req.path.startsWith("/analytics")
+  ) {
+    return next();
+  }
   res.json({ message: "API is running" });
 });
 
@@ -43,6 +55,9 @@ app.use(`${config.server.apiPrefix}/auth`, authRoutes);
 // Habits routes
 app.use(`${config.server.apiPrefix}/habits`, habitsRoutes);
 
+// Analytics routes
+app.use(`${config.server.apiPrefix}/analytics`, analyticsRoutes);
+
 app.use(notFoundHandler);
 
 app.use(errorHandler);
@@ -50,6 +65,9 @@ app.use(errorHandler);
 const startServer = async (): Promise<void> => {
   try {
     await database.connect();
+
+    const apolloServer = createApolloServer();
+    await startApolloServer(apolloServer, app);
 
     const server = app.listen(config.server.port, () => {
       logger.info(
@@ -67,6 +85,7 @@ const startServer = async (): Promise<void> => {
 
       server.close(async () => {
         logger.info("HTTP server closed");
+        await apolloServer.stop();
         await database.disconnect();
         process.exit(0);
       });
