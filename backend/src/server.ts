@@ -11,6 +11,7 @@ import {
 import { apiLimiter } from "./core/middlewares/rateLimit.middleware.js";
 
 import authRoutes from "./modules/auth/auth.routes.js";
+import habitsRoutes from "./modules/habits/habits.routes.js";
 
 const app = express();
 
@@ -38,6 +39,9 @@ app.use(config.server.apiPrefix, (req, res) => {
 
 // Auth routes
 app.use(`${config.server.apiPrefix}/auth`, authRoutes);
+
+// Habits routes
+app.use(`${config.server.apiPrefix}/habits`, habitsRoutes);
 
 app.use(notFoundHandler);
 
