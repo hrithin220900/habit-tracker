@@ -8,6 +8,7 @@ import {
 import { AuthenticationError, ConflictError } from "../../core/utils/errors.js";
 import { logger } from "../../core/utils/logger.js";
 import type { RegisterInput, LoginInput } from "./auth.validators.js";
+import { authEvents } from "./auth.events.js";
 
 export interface TokenResponse {
   accessToken: string;
@@ -105,6 +106,8 @@ export class AuthService {
         "User logged in successfully"
       );
 
+      authEvents.emitUserAuthenticated(user._id.toString(), user.email);
+
       return {
         accessToken,
         refreshToken,
@@ -162,6 +165,7 @@ export class AuthService {
   async logout(userId: string): Promise<void> {
     try {
       await authRepository.clearRefreshToken(userId);
+      authEvents.emitUserLoggedOut(userId);
       logger.info({ userId }, "User logged out successfully");
     } catch (error) {
       logger.error({ error, userId }, "Error during logout");

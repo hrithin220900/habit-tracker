@@ -13,7 +13,13 @@ export const validate =
       if ("shape" in schema && "body" in (schema as any).shape) {
         validationSchema = (schema as any).shape[source];
       }
-      const validated = await validationSchema.parseAsync(data);
+
+      let dataToValidate = data;
+      if (source === "query" && typeof data === "object") {
+        dataToValidate = { ...data };
+      }
+
+      const validated = await validationSchema.parseAsync(dataToValidate);
 
       req[source] = validated as (typeof req)[typeof source];
       next();

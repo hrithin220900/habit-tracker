@@ -13,10 +13,13 @@ import { apiLimiter } from "./core/middlewares/rateLimit.middleware.js";
 import authRoutes from "./modules/auth/auth.routes.js";
 import habitsRoutes from "./modules/habits/habits.routes.js";
 import analyticsRoutes from "./modules/analytics/analytics.routes.js";
+import adminRoutes from "./modules/admin/admin.routes.js";
 import {
   createApolloServer,
   startApolloServer,
 } from "./core/graphql/server.js";
+import { initializeSocket } from "./core/socket/socket.server.js";
+import { createServer } from "http";
 
 const app = express();
 
@@ -58,6 +61,9 @@ app.use(`${config.server.apiPrefix}/habits`, habitsRoutes);
 // Analytics routes
 app.use(`${config.server.apiPrefix}/analytics`, analyticsRoutes);
 
+// Admin routes
+app.use(`${config.server.apiPrefix}/admin`, adminRoutes);
+
 app.use(notFoundHandler);
 
 app.use(errorHandler);
@@ -66,10 +72,14 @@ const startServer = async (): Promise<void> => {
   try {
     await database.connect();
 
+    const httpServer = createServer(app);
+
+    initializeSocket(httpServer);
+
     const apolloServer = createApolloServer();
     await startApolloServer(apolloServer, app);
 
-    const server = app.listen(config.server.port, () => {
+    const server = httpServer.listen(config.server.port, () => {
       logger.info(
         {
           port: config.server.port,

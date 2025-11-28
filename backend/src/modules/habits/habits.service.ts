@@ -5,6 +5,7 @@ import type {
   CreateHabitInput,
   UpdateHabitInput,
 } from "./habits.validators.js";
+import { habitsEvents } from "./habits.events.js";
 
 function getTodayDateString(): string {
   const today = new Date();
@@ -88,7 +89,7 @@ export class HabitsService {
 
       logger.info({ habitId: habit._id, userId }, "Habit created successfully");
 
-      return {
+      const habitData = {
         id: habit._id.toString(),
         userId: habit.userId.toString(),
         name: habit.name,
@@ -102,6 +103,10 @@ export class HabitsService {
         createdAt: habit.createdAt,
         updatedAt: habit.updatedAt,
       };
+
+      habitsEvents.emitHabitCreated(userId, habitData);
+
+      return habitData;
     } catch (error) {
       logger.error({ error, userId }, "Error creating habit");
       throw error;
@@ -217,7 +222,7 @@ export class HabitsService {
 
       logger.info({ habitId, userId }, "Habit updated successfully");
 
-      return {
+      const habitData = {
         id: habit._id.toString(),
         userId: habit.userId.toString(),
         name: habit.name,
@@ -231,6 +236,10 @@ export class HabitsService {
         createdAt: habit.createdAt,
         updatedAt: habit.updatedAt,
       };
+
+      habitsEvents.emitHabitUpdated(userId, habitData);
+
+      return habitData;
     } catch (error) {
       if (error instanceof NotFoundError) {
         throw error;
@@ -243,6 +252,7 @@ export class HabitsService {
   async deleteHabit(habitId: string, userId: string): Promise<void> {
     try {
       await habitsRepository.delete(habitId, userId);
+      habitsEvents.emitHabitDeleted(userId, habitId);
       logger.info({ habitId, userId }, "Habit deleted successfully");
     } catch (error) {
       if (error instanceof NotFoundError) {
@@ -287,7 +297,7 @@ export class HabitsService {
         "Habit marked as complete"
       );
 
-      return {
+      const completionData = {
         id: completion._id.toString(),
         habitId: completion.habitId.toString(),
         userId: completion.userId.toString(),
@@ -295,6 +305,10 @@ export class HabitsService {
         completedAt: completion.completedAt,
         streak: completion.streak,
       };
+
+      habitsEvents.emitHabitCompleted(userId, habitId, completionDate, streak);
+
+      return completionData;
     } catch (error) {
       if (error instanceof NotFoundError || error instanceof ConflictError) {
         throw error;
