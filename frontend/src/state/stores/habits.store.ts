@@ -19,9 +19,15 @@ export const useHabitsStore = create<HabitsState>((set) => ({
   setHabits: (habits) => set({ habits }),
 
   addHabit: (habit) =>
-    set((state) => ({
-      habits: [...state.habits, habit],
-    })),
+    set((state) => {
+      // Check if habit already exists to prevent duplicates
+      if (state.habits.some((h) => h.id === habit.id)) {
+        return state;
+      }
+      return {
+        habits: [...state.habits, habit],
+      };
+    }),
 
   updateHabit: (habitId, updates) =>
     set((state) => ({

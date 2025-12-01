@@ -15,16 +15,17 @@ interface HabitCardProps {
 }
 
 export function HabitCard({ habit, currentStreak = 0, onEdit, onDelete }: HabitCardProps) {
-  const { markComplete, loading } = useHabits();
+  const { markComplete, loading, fetchHabits } = useHabits();
   const [isCompleting, setIsCompleting] = useState(false);
-  const [isCompleted, setIsCompleted] = useState(false);
+  // Use habit.isCompletedToday from backend, fallback to local state
+  const isCompleted = habit.isCompletedToday || false;
 
   const handleComplete = async () => {
     try {
       setIsCompleting(true);
       await markComplete(habit.id);
-      setIsCompleted(true);
-      setTimeout(() => setIsCompleted(false), 2000);
+      // Refetch habits to get updated completion status from backend
+      await fetchHabits();
     } catch (error) {
       console.error('Failed to mark complete:', error);
     } finally {

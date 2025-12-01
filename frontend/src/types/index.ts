@@ -24,6 +24,7 @@ export interface Habit {
   publicId?: string;
   createdAt: string;
   updatedAt: string;
+  isCompletedToday?: boolean;
 }
 
 export interface HabitCompletion {

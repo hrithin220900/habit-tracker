@@ -116,21 +116,35 @@ export class HabitsService {
   async getUserHabits(userId: string) {
     try {
       const habits = await habitsRepository.findByUserId(userId);
+      const today = new Date().toISOString().split("T")[0]; // YYYY-MM-DD format
 
-      return habits.map((habit) => ({
-        id: habit._id.toString(),
-        userId: habit.userId.toString(),
-        name: habit.name,
-        description: habit.description,
-        frequency: habit.frequency,
-        color: habit.color,
-        icon: habit.icon,
-        reminderTime: habit.reminderTime,
-        isPublic: habit.isPublic,
-        publicId: habit.publicId,
-        createdAt: habit.createdAt,
-        updatedAt: habit.updatedAt,
-      }));
+      const habitsWithCompletion = await Promise.all(
+        habits.map(async (habit) => {
+          const isCompletedToday = await habitsRepository.findCompletion(
+            habit._id.toString(),
+            userId,
+            today
+          );
+
+          return {
+            id: habit._id.toString(),
+            userId: habit.userId.toString(),
+            name: habit.name,
+            description: habit.description,
+            frequency: habit.frequency,
+            color: habit.color,
+            icon: habit.icon,
+            reminderTime: habit.reminderTime,
+            isPublic: habit.isPublic,
+            publicId: habit.publicId,
+            createdAt: habit.createdAt,
+            updatedAt: habit.updatedAt,
+            isCompletedToday: !!isCompletedToday,
+          };
+        })
+      );
+
+      return habitsWithCompletion;
     } catch (error) {
       logger.error({ error, userId }, "Error getting user habits");
       throw error;

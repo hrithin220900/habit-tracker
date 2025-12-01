@@ -27,8 +27,10 @@ function DashboardPageContent() {
   const { user } = useAuthStore();
   const { habits, fetchHabits } = useHabits();
 
-  const { data, loading: statsLoading, error: statsError } =
-    useQuery<GetDashboardResponse>(GET_DASHBOARD);
+  const { data, loading: statsLoading, error: statsError, refetch } =
+    useQuery<GetDashboardResponse>(GET_DASHBOARD, {
+      fetchPolicy: 'cache-and-network', // Refetch on mount and when cache is stale
+    });
 
   useEffect(() => {
     fetchHabits();
