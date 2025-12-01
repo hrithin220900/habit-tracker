@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import Link from 'next/link';
-import { useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client/react';
 import { ProtectedRoute } from '../../../components/shared/ProtectedRoute';
 import { Button } from '../../../components/ui/button';
 import {

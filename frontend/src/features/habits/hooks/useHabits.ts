@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useHabitsStore } from '../../../state/stores/habits.store';
 import { habitsService } from '../services/habits.service';
 import { getSocket } from '../../../lib/socket';
@@ -10,7 +10,7 @@ export function useHabits() {
   const [error, setError] = useState<string | null>(null);
 
   // Fetch habits
-  const fetchHabits = async () => {
+  const fetchHabits = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -22,7 +22,7 @@ export function useHabits() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [setHabits]);
 
   // Create habit
   const createHabit = async (data: Parameters<typeof habitsService.createHabit>[0]) => {
