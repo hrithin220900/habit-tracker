@@ -10,7 +10,7 @@ interface AdminUsersTableProps {
   onChangePage: (page: number) => void;
   currentPage: number;
   totalPages?: number;
-  onUpdateRole: (userId: string, role: 'user' | 'admin') => Promise<void>;
+  onUpdateRole: (userId: string, role: 'user' | 'admin') => Promise<AdminUser>;
   onDeleteUser: (userId: string) => Promise<void>;
 }
 

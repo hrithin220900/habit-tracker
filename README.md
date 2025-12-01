@@ -142,6 +142,16 @@ docker run -d \
   mongo:7
 ```
 
+To **stop** and **restart** this MongoDB container later:
+
+```bash
+# Stop container
+docker stop habit-tracker-mongodb
+
+# Start container again
+docker start habit-tracker-mongodb
+```
+
 ---
 
 ## 4. Run Backend (Dev)

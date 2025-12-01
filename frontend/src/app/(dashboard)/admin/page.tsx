@@ -1,20 +1,24 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { ProtectedRoute } from '../../../components/shared/ProtectedRoute.js';
-import { useAuthStore } from '../../../state/stores/auth.store.js';
-import { Button } from '../../../components/ui/button.js';
+import { useEffect, useState } from "react";
+import { ProtectedRoute } from "../../../components/shared/ProtectedRoute.js";
+import { useAuthStore } from "../../../state/stores/auth.store.js";
+import { Button } from "../../../components/ui/button.js";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-} from '../../../components/ui/card.js';
-import { Input } from '../../../components/ui/input.js';
-import { useAdminUsers, useAdminHabits, useAdminMetrics } from '../../../features/admin/hooks/useAdmin.js';
-import { AdminUsersTable } from '../../../features/admin/components/AdminUsersTable.js';
-import { AdminHabitsTable } from '../../../features/admin/components/AdminHabitsTable.js';
-import { AdminMetricsCards } from '../../../features/admin/components/AdminMetricsCards.js';
+} from "../../../components/ui/card.js";
+import { Input } from "../../../components/ui/input.js";
+import {
+  useAdminUsers,
+  useAdminHabits,
+  useAdminMetrics,
+} from "../../../features/admin/hooks/useAdmin.js";
+import { AdminUsersTable } from "../../../features/admin/components/AdminUsersTable.js";
+import { AdminHabitsTable } from "../../../features/admin/components/AdminHabitsTable.js";
+import { AdminMetricsCards } from "../../../features/admin/components/AdminMetricsCards.js";
 
 function AdminPageContent() {
   const { user } = useAuthStore();
@@ -34,15 +38,10 @@ function AdminPageContent() {
     error: habitsError,
     fetchHabits,
   } = useAdminHabits();
-  const {
-    metrics,
-    loading: metricsLoading,
-    error: metricsError,
-    fetchMetrics,
-  } = useAdminMetrics();
+  const { metrics, error: metricsError, fetchMetrics } = useAdminMetrics();
 
-  const [userSearch, setUserSearch] = useState('');
-  const [habitSearch, setHabitSearch] = useState('');
+  const [userSearch, setUserSearch] = useState("");
+  const [habitSearch, setHabitSearch] = useState("");
   const [usersPage, setUsersPage] = useState(1);
   const [habitsPage, setHabitsPage] = useState(1);
 
@@ -70,7 +69,7 @@ function AdminPageContent() {
     fetchHabits(1, 10, habitSearch || undefined);
   };
 
-  const isAdmin = user?.role === 'admin';
+  const isAdmin = user?.role === "admin";
 
   return (
     <ProtectedRoute>
@@ -118,9 +117,7 @@ function AdminPageContent() {
               {/* Users */}
               <section className="space-y-3">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                  <h2 className="text-lg sm:text-xl font-semibold">
-                    Users
-                  </h2>
+                  <h2 className="text-lg sm:text-xl font-semibold">Users</h2>
                   <form
                     onSubmit={handleUserSearchSubmit}
                     className="w-full sm:w-auto flex gap-2"
@@ -154,9 +151,7 @@ function AdminPageContent() {
               {/* Habits */}
               <section className="space-y-3">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                  <h2 className="text-lg sm:text-xl font-semibold">
-                    Habits
-                  </h2>
+                  <h2 className="text-lg sm:text-xl font-semibold">Habits</h2>
                   <form
                     onSubmit={handleHabitSearchSubmit}
                     className="w-full sm:w-auto flex gap-2"
@@ -193,5 +188,3 @@ function AdminPageContent() {
 }
 
 export default AdminPageContent;
-
-
