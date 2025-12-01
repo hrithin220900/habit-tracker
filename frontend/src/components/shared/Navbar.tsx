@@ -4,13 +4,15 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuthStore } from '../../state/stores/auth.store.js';
 import { Button } from '../ui/button.js';
-import { LogOut, Menu, X } from 'lucide-react';
+import { LogOut, Menu, X, Shield } from 'lucide-react';
 import { useState } from 'react';
 
 export function Navbar() {
   const { user, isAuthenticated, clearAuth } = useAuthStore();
   const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const isAdmin = user?.role === 'admin';
 
   const handleLogout = async () => {
     clearAuth();
@@ -25,10 +27,16 @@ export function Navbar() {
     <nav className="border-b border-border bg-card sticky top-0 z-40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <div className="flex items-center">
+          <div className="flex items-center gap-2">
             <Link href="/dashboard" className="text-xl font-bold text-foreground">
               Habit Tracker
             </Link>
+            {isAdmin && (
+              <span className="hidden sm:inline-flex items-center rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-medium text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300">
+                <Shield className="w-3 h-3 mr-1" />
+                Admin
+              </span>
+            )}
           </div>
 
           {/* Desktop Menu */}
@@ -45,6 +53,14 @@ export function Navbar() {
             >
               Habits
             </Link>
+            {isAdmin && (
+              <Link
+                href="/admin"
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Admin
+              </Link>
+            )}
             <div className="flex items-center gap-3">
               <span className="text-sm text-muted-foreground">{user?.name}</span>
               <Button
@@ -88,6 +104,15 @@ export function Navbar() {
             >
               Habits
             </Link>
+            {isAdmin && (
+              <Link
+                href="/admin"
+                className="block text-sm font-medium text-muted-foreground hover:text-foreground"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Admin
+              </Link>
+            )}
             <div className="pt-3 border-t border-border">
               <p className="text-sm text-muted-foreground mb-2">{user?.name}</p>
               <Button
@@ -106,4 +131,5 @@ export function Navbar() {
     </nav>
   );
 }
+
 
