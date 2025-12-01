@@ -1,10 +1,10 @@
-import { api } from '../../../lib/api-client.js';
+import { api } from '../../../lib/api-client';
 import type {
   User,
   Habit,
   ApiResponse,
   PaginatedResponse,
-} from '../../../types/index.js';
+} from '../../../types/index';
 
 export interface AdminUser extends User {
   stats?: {

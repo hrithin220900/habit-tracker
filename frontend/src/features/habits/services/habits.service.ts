@@ -1,5 +1,5 @@
-import { api } from '../../../lib/api-client.js';
-import type { Habit, HabitCompletion, ApiResponse } from '../../../types/index.js';
+import { api } from '../../../lib/api-client';
+import type { Habit, HabitCompletion, ApiResponse } from '../../../types/index';
 
 export interface CreateHabitData {
   name: string;

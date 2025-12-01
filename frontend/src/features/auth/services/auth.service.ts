@@ -1,5 +1,5 @@
-import { api } from "../../../lib/api-client.js";
-import type { User, ApiResponse } from "../../../types/index.js";
+import { api } from "../../../lib/api-client";
+import type { User, ApiResponse } from "../../../types/index";
 
 export interface LoginCredentials {
   email: string;

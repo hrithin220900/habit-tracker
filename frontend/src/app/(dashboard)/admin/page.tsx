@@ -1,24 +1,24 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ProtectedRoute } from "../../../components/shared/ProtectedRoute.js";
-import { useAuthStore } from "../../../state/stores/auth.store.js";
-import { Button } from "../../../components/ui/button.js";
+import { ProtectedRoute } from "../../../components/shared/ProtectedRoute";
+import { useAuthStore } from "../../../state/stores/auth.store";
+import { Button } from "../../../components/ui/button";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-} from "../../../components/ui/card.js";
-import { Input } from "../../../components/ui/input.js";
+} from "../../../components/ui/card";
+import { Input } from "../../../components/ui/input";
 import {
   useAdminUsers,
   useAdminHabits,
   useAdminMetrics,
-} from "../../../features/admin/hooks/useAdmin.js";
-import { AdminUsersTable } from "../../../features/admin/components/AdminUsersTable.js";
-import { AdminHabitsTable } from "../../../features/admin/components/AdminHabitsTable.js";
-import { AdminMetricsCards } from "../../../features/admin/components/AdminMetricsCards.js";
+} from "../../../features/admin/hooks/useAdmin";
+import { AdminUsersTable } from "../../../features/admin/components/AdminUsersTable";
+import { AdminHabitsTable } from "../../../features/admin/components/AdminHabitsTable";
+import { AdminMetricsCards } from "../../../features/admin/components/AdminMetricsCards";
 
 function AdminPageContent() {
   const { user } = useAuthStore();

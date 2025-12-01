@@ -1,11 +1,11 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { User } from "../../types/index.js";
+import type { User } from "../../types/index";
 import {
   initSocket,
   disconnectSocket,
   joinUserRoom,
-} from "../../lib/socket.js";
+} from "../../lib/socket";
 
 interface AuthState {
   user: User | null;

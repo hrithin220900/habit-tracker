@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, AxiosError, AxiosRequestConfig } from "axios";
-import { config } from "./config.js";
-import type { ApiResponse } from "../types/index.js";
+import { config } from "./config";
+import type { ApiResponse } from "../types/index";
 
 const apiClient: AxiosInstance = axios.create({
   baseURL: config.api.baseUrl,

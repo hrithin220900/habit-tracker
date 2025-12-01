@@ -2,12 +2,12 @@
 
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { ProtectedRoute } from '../../../../components/shared/ProtectedRoute.js';
-import { habitsService } from '../../../../features/habits/services/habits.service.js';
-import { Button } from '../../../../components/ui/button.js';
-import { Card, CardContent, CardHeader, CardTitle } from '../../../../components/ui/card.js';
+import { ProtectedRoute } from '../../../../components/shared/ProtectedRoute';
+import { habitsService } from '../../../../features/habits/services/habits.service';
+import { Button } from '../../../../components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '../../../../components/ui/card';
 import { ArrowLeft, Edit, Share2 } from 'lucide-react';
-import type { Habit } from '../../../../types/index.js';
+import type { Habit } from '../../../../types/index';
 
 function HabitDetailPageContent() {
   const params = useParams();

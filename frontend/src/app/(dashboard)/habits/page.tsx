@@ -1,15 +1,15 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { ProtectedRoute } from '../../../components/shared/ProtectedRoute.js';
-import { useHabits } from '../../../features/habits/hooks/useHabits.js';
-import { HabitCard } from '../../../features/habits/components/HabitCard.js';
-import { HabitForm } from '../../../features/habits/components/HabitForm.js';
-import { Button } from '../../../components/ui/button.js';
-import { Input } from '../../../components/ui/input.js';
+import { ProtectedRoute } from '../../../components/shared/ProtectedRoute';
+import { useHabits } from '../../../features/habits/hooks/useHabits';
+import { HabitCard } from '../../../features/habits/components/HabitCard';
+import { HabitForm } from '../../../features/habits/components/HabitForm';
+import { Button } from '../../../components/ui/button';
+import { Input } from '../../../components/ui/input';
 import { Plus, Search } from 'lucide-react';
-import type { Habit } from '../../../types/index.js';
-import type { CreateHabitData } from '../../../features/habits/services/habits.service.js';
+import type { Habit } from '../../../types/index';
+import type { CreateHabitData } from '../../../features/habits/services/habits.service';
 
 function HabitsPageContent() {
   const { habits, loading, error, fetchHabits, createHabit, updateHabit, deleteHabit } = useHabits();

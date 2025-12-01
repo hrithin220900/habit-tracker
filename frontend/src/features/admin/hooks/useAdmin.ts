@@ -1,11 +1,11 @@
 import { useState, useCallback } from 'react';
-import { adminService } from '../services/admin.service.js';
+import { adminService } from '../services/admin.service';
 import type {
   AdminUser,
   AdminMetrics,
   AdminUsersResponse,
   AdminHabitsResponse,
-} from '../services/admin.service.js';
+} from '../services/admin.service';
 
 export function useAdminUsers() {
   const [data, setData] = useState<AdminUsersResponse | null>(null);

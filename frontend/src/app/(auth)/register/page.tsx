@@ -2,9 +2,9 @@
 
 import { useState, FormEvent } from "react";
 import Link from "next/link";
-import { useAuth } from "../../../features/auth/hooks/useAuth.js";
-import { Button } from "../../../components/ui/button.js";
-import { Input } from "../../../components/ui/input.js";
+import { useAuth } from "../../../features/auth/hooks/useAuth";
+import { Button } from "../../../components/ui/button";
+import { Input } from "../../../components/ui/input";
 import {
   Card,
   CardContent,
@@ -12,7 +12,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../../../components/ui/card.js";
+} from "../../../components/ui/card";
 
 export default function RegisterPage() {
   const { register, loading, error } = useAuth();

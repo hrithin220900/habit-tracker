@@ -1,5 +1,5 @@
-import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card.js';
-import type { AdminMetrics } from '../services/admin.service.js';
+import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
+import type { AdminMetrics } from '../services/admin.service';
 
 interface AdminMetricsCardsProps {
   metrics?: AdminMetrics | null;

@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useHabitsStore } from '../../../state/stores/habits.store.js';
-import { habitsService } from '../services/habits.service.js';
-import { getSocket } from '../../../lib/socket.js';
-import type { Habit } from '../../../types/index.js';
+import { useHabitsStore } from '../../../state/stores/habits.store';
+import { habitsService } from '../services/habits.service';
+import { getSocket } from '../../../lib/socket';
+import type { Habit } from '../../../types/index';
 
 export function useHabits() {
   const { habits, setHabits, addHabit, updateHabit, removeHabit } = useHabitsStore();

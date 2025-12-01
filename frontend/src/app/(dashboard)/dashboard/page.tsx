@@ -3,20 +3,20 @@
 import { useEffect } from 'react';
 import Link from 'next/link';
 import { useQuery } from '@apollo/client';
-import { ProtectedRoute } from '../../../components/shared/ProtectedRoute.js';
-import { Button } from '../../../components/ui/button.js';
+import { ProtectedRoute } from '../../../components/shared/ProtectedRoute';
+import { Button } from '../../../components/ui/button';
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-} from '../../../components/ui/card.js';
-import { useAuthStore } from '../../../state/stores/auth.store.js';
-import { useHabits } from '../../../features/habits/hooks/useHabits.js';
-import { GET_DASHBOARD } from '../../../api/graphql/queries.js';
-import type { DashboardStats } from '../../../types/index.js';
-import { WeeklyCompletionsChart } from '../../../components/charts/WeeklyCompletionsChart.js';
-import { HabitCompletionBarChart } from '../../../components/charts/HabitCompletionBarChart.js';
+} from '../../../components/ui/card';
+import { useAuthStore } from '../../../state/stores/auth.store';
+import { useHabits } from '../../../features/habits/hooks/useHabits';
+import { GET_DASHBOARD } from '../../../api/graphql/queries';
+import type { DashboardStats } from '../../../types/index';
+import { WeeklyCompletionsChart } from '../../../components/charts/WeeklyCompletionsChart';
+import { HabitCompletionBarChart } from '../../../components/charts/HabitCompletionBarChart';
 import { Plus, TrendingUp, Flame } from 'lucide-react';
 
 interface GetDashboardResponse {

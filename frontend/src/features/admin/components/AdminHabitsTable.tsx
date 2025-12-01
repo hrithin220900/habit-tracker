@@ -1,6 +1,6 @@
 'use client';
 
-import type { Habit } from '../../../types/index.js';
+import type { Habit } from '../../../types/index';
 
 interface AdminHabitsTableProps {
   habits: Habit[];

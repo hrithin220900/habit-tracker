@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import type { AdminUser } from '../services/admin.service.js';
-import { Button } from '../../../components/ui/button.js';
+import type { AdminUser } from '../services/admin.service';
+import { Button } from '../../../components/ui/button';
 
 interface AdminUsersTableProps {
   users: AdminUser[];

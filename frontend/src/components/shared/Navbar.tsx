@@ -2,8 +2,8 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useAuthStore } from '../../state/stores/auth.store.js';
-import { Button } from '../ui/button.js';
+import { useAuthStore } from '../../state/stores/auth.store';
+import { Button } from '../ui/button';
 import { LogOut, Menu, X, Shield } from 'lucide-react';
 import { useState } from 'react';
 

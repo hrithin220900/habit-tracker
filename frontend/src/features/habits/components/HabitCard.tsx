@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { useHabits } from '../hooks/useHabits.js';
-import { Button } from '../../../components/ui/button.js';
-import { getTodayDateString } from '../../../lib/utils.js';
-import type { Habit } from '../../../types/index.js';
+import { useHabits } from '../hooks/useHabits';
+import { Button } from '../../../components/ui/button';
+import { getTodayDateString } from '../../../lib/utils';
+import type { Habit } from '../../../types/index';
 import { Flame, Share2, Trash2, Edit } from 'lucide-react';
 
 interface HabitCardProps {

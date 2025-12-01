@@ -9,7 +9,7 @@ import {
   ResponsiveContainer,
   CartesianGrid,
 } from 'recharts';
-import type { DashboardStats } from '../../types/index.js';
+import type { DashboardStats } from '../../types/index';
 
 interface WeeklyCompletionsChartProps {
   data: DashboardStats['weeklyCompletions'];

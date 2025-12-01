@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, FormEvent } from 'react';
-import { Button } from '../../../components/ui/button.js';
-import { Input } from '../../../components/ui/input.js';
+import { Button } from '../../../components/ui/button';
+import { Input } from '../../../components/ui/input';
 import {
   Card,
   CardContent,
@@ -10,9 +10,9 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '../../../components/ui/card.js';
-import type { Habit, HabitFrequency } from '../../../types/index.js';
-import type { CreateHabitData } from '../services/habits.service.js';
+} from '../../../components/ui/card';
+import type { Habit, HabitFrequency } from '../../../types/index';
+import type { CreateHabitData } from '../services/habits.service';
 
 const COLORS = [
   '#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6',

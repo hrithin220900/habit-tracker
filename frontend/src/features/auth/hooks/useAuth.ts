@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useAuthStore } from "../../../state/stores/auth.store.js";
-import { authService } from "../services/auth.service.js";
+import { useAuthStore } from "../../../state/stores/auth.store";
+import { authService } from "../services/auth.service";
 import type {
   LoginCredentials,
   RegisterData,
-} from "../services/auth.service.js";
+} from "../services/auth.service";
 
 export function useAuth() {
   const router = useRouter();

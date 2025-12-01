@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { Habit } from "../../types/index.js";
+import type { Habit } from "../../types/index";
 
 interface HabitsState {
   habits: Habit[];

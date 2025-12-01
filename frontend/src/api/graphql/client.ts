@@ -7,7 +7,7 @@ import {
 import { setContext } from "@apollo/client/link/context";
 import { onError } from "@apollo/client/link/error";
 import { GraphQLError } from "graphql";
-import { config } from "../../lib/config.js";
+import { config } from "../../lib/config";
 
 const httpLink = createHttpLink({
   uri: config.api.graphqlUrl,
